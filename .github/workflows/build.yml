@@ -8,9 +8,6 @@ on:
 permissions:
   contents: write
 
-permissions:
-  contents: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,14 +37,6 @@ jobs:
           path: app/build/outputs/apk/debug/*.apk
 
       - name: Publish APK to a Release (public direct-download link)
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: build-${{ github.run_number }}
-          name: Debug build #${{ github.run_number }}
-          files: app/build/outputs/apk/debug/*.apk
-          prerelease: true
-
-      - name: Publish APK to release (direct download link)
         if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
         with:
